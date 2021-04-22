@@ -51,7 +51,6 @@ export class RegisterComponent {
         if (d['status'] == 'done') {
           console.log('Registrazione eseguita correttamente');
           this.result = 3;
-		  window.location.href = './makeWaifu';
         } else if (d['status'] == 'existing_user'){
           console.log('Errore! Nome utente già registrato');
           this.result = 2;
