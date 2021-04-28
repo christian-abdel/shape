@@ -7,18 +7,27 @@ import { ApiService } from './api.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  loggedin:boolean = false;
+  loggedin:boolean;
   constructor(private api: ApiService){
-    this.loggedin = this.api.loggedin;
+    this.api.setfoodList();
   }
 
   ngOnInit(): void {
     if(!!localStorage.getItem('token')){
       this.api.setLogStatus(true);
     }
+
+    this.api.getSalt();
+    this.refreshLogStatus();
+  }
+
+  public refreshLogStatus(): void {
+    this.loggedin = this.api.loggedin;
   }
 
   logOut(){
     this.api.setLogStatus(false);
+    this.loggedin = this.api.loggedin;
+    localStorage.removeItem('token');
   }
 }

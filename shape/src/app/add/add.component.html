@@ -1,0 +1,49 @@
+<div class="container-fluid bg" >
+
+<br><br><br><br><br><br><br>
+
+  <div class="row"> <!-- Form row -->
+
+    <div class="col-5 mx-auto">
+
+      <h1 class="text-dark" style="text-align:center">Register!</h1>
+
+      <form [formGroup]="Form" (ngSubmit)="onsubmit()">
+
+        <div class="form-group">
+          <select class="form-control ddl" id="pasto" [(ngModel)]="selectedPasto" formControlName="pasto" required>
+						<option *ngFor="let o of pastoOptions">
+						  {{o.n}}
+						</option>
+					  </select>
+        </div>
+
+        <div class="form-group">
+          <select class="form-control ddl" id="food" [(ngModel)]="selectedFood" formControlName="food" required>
+						<option *ngFor="let o of foodOptions">
+						  {{o.n}}
+						</option>
+					  </select>
+        </div>
+
+        <div class="form-group">
+          <label class="text-dark" for="grammi">Grammi</label>
+          <input class="form-control" id="grammi" placeholder="Inserisci i grammi" type="text" formControlName="grammi" required>
+        </div>
+
+        <div class = "text-center">
+          <button type="submit" class="btn btn-outline-danger">Register</button>
+        </div>
+
+      </form>
+
+      <br>
+
+      <p #alreadyRegistered class="text-danger rounded p-2 bg-label-danger" *ngIf="result == 2"><b>Registration failed!</b> Username already registered</p>
+      <p #missingValues class="text-danger rounded p-2 bg-label-danger" *ngIf="result == 1"><b>Registration failed!</b> You might complete the entire form</p>
+
+    </div>
+
+  </div>
+
+</div>

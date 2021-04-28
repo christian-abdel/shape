@@ -1,17 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import * as bcrypt from 'bcryptjs';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+  private subject = new Subject<any>();
 
+  setfoodList() {
+	this.getfoods().subscribe((data)=> {
+    this.subject.next(data);
+  });
+  }
+
+  getfoodList(){
+	 return this.subject.asObservable();
+  }
 
   salt: string;
   loggedin: boolean = false;
+  foodlist: any;
 
-  baseUrl = `https://3000-cyan-scallop-0n4xh9s4.ws-eu03.gitpod.io/`;
+  baseUrl = `https://3000-cyan-lemur-a3m40ayf.ws-eu03.gitpod.io/`;
 
   constructor(private http: HttpClient) { }
 
@@ -49,5 +61,25 @@ export class ApiService {
     return content;
   }
 
+  getfoods(){
+    let url = `${this.baseUrl}getfoods`;
+    let content = this.http.get(url);
+
+    return content;
+  }
+
+  addFood(pasto: string, cibo: string, grammi: string) {
+
+    let url = `${this.baseUrl}addFood`;
+    const myheader = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    let body = new HttpParams();
+    body = body.set('pasto', pasto);
+    body = body.set('cibo', cibo);
+    body = body.set('grammi', grammi);
+
+    let content = this.http.post(url, body, { headers: myheader });
+
+    return content;
+  }
 
 }

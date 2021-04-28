@@ -59,4 +59,56 @@ router.post('/login', function (req, res, next) {
     
 });
 
+router.get('/getfoods', function (req, res, next) {
+    
+    const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+    client.connect(err => {
+        const collection = client.db("food").collection("food1");
+        collection.find().toArray((err, result) => {
+            if (err) console.log(err.message);
+            else { res.send(result); }
+            client.close();
+        });
+    });
+    
+});
+
+router.post('/addFood', function(req, res) {
+    var food = req.body.cibo;
+    var pasto = req.body.pasto;
+    var grammi = req.body.grammi;
+
+    const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+
+    client.connect(err => {
+        var len;
+        const collection = client.db("userData").collection("cibi");
+        const collection1 = client.db("userData").collection("pasti");
+        collection1.find({ 'nome': `${pasto}` }).limit(1).toArray((err, result) => {
+            if (err) console.log(err.message);
+            else {
+                len = result.length;
+                if(len != 1) {
+                   var myobj = { nome: `${pasto}`, data: `${Date.now()}` };
+                    collection1.insertOne(myobj, function(err, res) {
+                        if (err) throw err;
+                    });
+                }
+            }
+        });
+
+        
+        var myobj = { nome: `${food}`, pasto: `${pasto}`, grammi: `${grammi}` };
+        collection.insertOne(myobj, function(err, res) {
+            if (err) throw err;
+        });
+        res.send("");
+        setTimeout(function () {
+                client.close();
+            }, 500);
+
+    });
+    
+});
+
 module.exports = router;
