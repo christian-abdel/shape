@@ -17,7 +17,9 @@ export class RegisterComponent {
   registrationForm = this.formBuilder.group({
     username: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    height: '',
+    weight: ''
   });
 
   constructor(
@@ -30,14 +32,14 @@ export class RegisterComponent {
   onsubmit(): void {
     let data = this.registrationForm.value;
 
-    if ((data.username == "") || (data.username == null) || (data.password == "") || (data.password == null) || (data.confirmPassword == "") || (data.confirmPassword == null) ) {
+    if ((data.username == "") || (data.username == null) || (data.password == "") || (data.password == null) || (data.confirmPassword == "") || (data.confirmPassword == null) || (data.height == "") || (data.height == null) || (data.weight == "") || (data.weight == null) ) {
       this.result = 1;
     } else {
-      this.apiServiceObs = this.api.register(data.username, data.password);
+      this.apiServiceObs = this.api.register(data.username, data.password, data.height, data.weight);
       this.apiServiceObs.subscribe((d) => {
         if (d['status'] == 'done') {
           console.log('Registrazione eseguita correttamente');
-          window.location.href = "./";
+          window.location.href = "./login";
         } else if (d['status'] == 'existing_user'){
           this.result = 2;
         } else {

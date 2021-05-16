@@ -11,6 +11,8 @@ var url = "mongodb+srv://abdel_christian:aaa123@cluster0.adniy.mongodb.net/myFir
 router.post('/register', function(req, res) {
     var username = req.body.username;
     var pwd = req.body.pwd;
+    var height = parseInt(req.body.height);
+    var weight = parseInt(req.body.weight);
 
     const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -29,7 +31,7 @@ router.post('/register', function(req, res) {
         });
 
         if (len != 1) {
-            var myobj = { username: `${username}`, password: `${pwd}` };
+            var myobj = { username: `${username}`, password: `${pwd}`, height: `${height}`, weight: `${weight}` };
             collection.insertOne(myobj, function(err, res) {
                 if (err) throw err;
                 console.log(`Utente ${username} registrato correttamente!`);

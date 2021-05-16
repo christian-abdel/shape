@@ -48,7 +48,7 @@ export class ApiService {
     return content;
   }
 
-  register(username: string, password: string) {
+  register(username: string, password: string, height: string, weight: string) {
     let pwd = bcrypt.hashSync(password, this.salt);
 
     let url = `${this.baseUrl}register`;
@@ -56,6 +56,8 @@ export class ApiService {
     let body = new HttpParams();
     body = body.set('username', username);
     body = body.set('pwd', pwd);
+    body = body.set('height', height);
+    body = body.set('weight', weight);
 
     let content = this.http.post(url, body, { headers: myheader });
 

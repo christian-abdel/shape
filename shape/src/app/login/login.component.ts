@@ -36,8 +36,10 @@ export class LoginComponent{
         if (bcrypt.compareSync(data.password, content[0]["password"])) {
           this.api.setLogStatus(true);
           localStorage.setItem('token', data.username);
+          localStorage.setItem('height', content[0]["height"]);
+          localStorage.setItem('weight', content[0]["weight"]);
 
-          window.location.href = './';
+          window.location.href = './list';
         } else { this.result = 1; }
       });
     }
