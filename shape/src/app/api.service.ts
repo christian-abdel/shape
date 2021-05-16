@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import * as bcrypt from 'bcryptjs';
 import { Subject, Observable } from 'rxjs';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class ApiService {
   loggedin: boolean = false;
   foodlist: any;
 
-  baseUrl = `https://3000-cyan-lemur-a3m40ayf.ws-eu03.gitpod.io/`;
+  baseUrl = `https://3000-teal-llama-xarmk2f1.ws-eu04.gitpod.io/`;
 
   constructor(private http: HttpClient) { }
 
@@ -69,16 +70,28 @@ export class ApiService {
   }
 
   addFood(pasto: string, cibo: string, grammi: string) {
-
     let url = `${this.baseUrl}addFood`;
+
+    var dateObj = new Date();
+    let month = dateObj.getUTCMonth() + 1; //months from 1-12
+    let day = dateObj.getUTCDate();
+    let year = dateObj.getUTCFullYear();
+
     const myheader = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     let body = new HttpParams();
+    body = body.set('data', `${year}-${month}-${day}`);
+    body = body.set('username', localStorage.getItem('token'));
     body = body.set('pasto', pasto);
     body = body.set('cibo', cibo);
     body = body.set('grammi', grammi);
 
     let content = this.http.post(url, body, { headers: myheader });
 
+    return content;
+  }
+
+  getUserData() {
+    let content = this.http.get(`${this.baseUrl}getUserData/${localStorage.getItem('token')}`);
     return content;
   }
 
