@@ -6,7 +6,8 @@
       <div class="row">
         <div class="col-7 mx-auto">
           <div class="float-left"><a href="#" (click)="remove()"><</a> {{date}} <a href="#" (click)="add()">></a></div>
-          <div class="float-right"><a href="/add">Add</a></div>
+          <div class="float-right"><a class="btn btn-primary" href="/add">Add</a></div>
+          <br><br>
         </div>
 
         <div class="col-7 mx-auto">
@@ -14,7 +15,7 @@
             <div class="card-header">Colazione</div>
             <div class="card-body">
               <div *ngFor="let i of colazione">
-                <div class="text-info"><a class="text-primary">{{i.nome}}</a>: {{i.grammi}}gr</div>
+                <div class="text-info"><a class="text-primary tdn">{{i.nome}}</a>: {{i.grammi}}gr</div>
               </div>
             </div>
           </div>
@@ -25,7 +26,7 @@
             <div class="card-header">Merenda 1</div>
             <div class="card-body">
               <div *ngFor="let i of merenda1">
-                <div class="text-info"><a class="text-primary">{{i.nome}}</a>: {{i.grammi}}gr</div>
+                <div class="text-info"><a class="text-primary tdn">{{i.nome}}</a>: {{i.grammi}}gr</div>
               </div>
             </div>
           </div>
@@ -36,7 +37,7 @@
             <div class="card-header">Pranzo</div>
             <div class="card-body">
               <div *ngFor="let i of pranzo">
-                <div class="text-info"><a class="text-primary">{{i.nome}}</a>: {{i.grammi}}gr</div>
+                <div class="text-info"><a class="text-primary tdn">{{i.nome}}</a>: {{i.grammi}}gr</div>
               </div>
             </div>
           </div>
@@ -47,7 +48,7 @@
             <div class="card-header">Merenda 2</div>
             <div class="card-body">
               <div *ngFor="let i of merenda2">
-                <div class="text-info"><a class="text-primary">{{i.nome}}</a>: {{i.grammi}}gr</div>
+                <div class="text-info"><a class="text-primary tdn">{{i.nome}}</a>: {{i.grammi}}gr</div>
               </div>
             </div>
           </div>
@@ -58,7 +59,7 @@
             <div class="card-header">Cena</div>
             <div class="card-body">
               <div *ngFor="let i of cena">
-                <div class="text-info"><a class="text-primary">{{i.nome}}</a>: {{i.grammi}}gr</div>
+                <div class="text-info"><a class="text-primary tdn">{{i.nome}}</a>: {{i.grammi}}gr</div>
               </div>
             </div>
           </div>
