@@ -24,7 +24,7 @@ export class ApiService {
   loggedin: boolean = false;
   foodlist: any;
 
-  baseUrl = `https://3000-teal-llama-xarmk2f1.ws-eu04.gitpod.io/`;
+  baseUrl = `https://3000-emerald-spider-bp6k78wh.ws-eu04.gitpod.io/`;
 
   constructor(private http: HttpClient) { }
 
